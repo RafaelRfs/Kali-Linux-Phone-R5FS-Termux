@@ -1,4 +1,4 @@
-echo "[+]Installing Kali Arm 64 minimal version.........."
+echo "[+]Installing Kali Arm 64 Complete version.........."
 echo
 apt install proot wget tar -y
 echo
