@@ -1,5 +1,5 @@
 bin_dir=/usr/bin/
-echo "[+]Instalando binarios..."
+echo "[+]Installing System binaries..."
 chmod 777 -R *
 sudo mv Client $bin_dir
 sudo mv Server $bin_dir
