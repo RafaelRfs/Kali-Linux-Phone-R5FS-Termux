@@ -41,7 +41,13 @@
 1. su -c dos2unix *.sh;
 1. apt install tsu;
 1. tsu;
-1. ./aptInstallKaliArmMin. sh or ./aptInstallKaliArmComplete. sh or ./aptInstallKaliArm64. sh
-1. ./kali.sh or kali
+1. ./aptInstallKaliArmMin. sh or ./aptInstallKaliArmComplete. sh or ./aptInstallKaliArm64. sh;
+1. ./kali.sh or kali;
+1. apt update;
+1. apt -fix-broken install;
+1. apt upgrade;
+1. apt install dos2unix;
+1. dos2unix *.sh;
+1. chmod 777 *;
 1. sh Setup . sh;
 
