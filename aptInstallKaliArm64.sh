@@ -1,4 +1,4 @@
-echo "[+]Installing Kali Arm 64 Complete version.........."
+echo "[+]Installing Kali Arm 64 version.........."
 apt install proot wget tar -y
 echo "installed successfully.... :D"
 echo "Now Kali Nethunter Phone Hacker  Is Installing......."
