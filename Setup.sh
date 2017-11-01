@@ -5,6 +5,8 @@ echo "______________________________________________"
 echo "[+]Setting the Termux Kali..."
 echo "______________________________________________"
 apt update
+apt -y --fix-broken install
+apt upgrade
 apt install -y dos2unix net-tools
 dos2unix *.sh
 chmod 777 -R *
