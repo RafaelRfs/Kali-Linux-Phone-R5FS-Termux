@@ -13,7 +13,7 @@
 -Python 2 && 3, C,C++,Ruby, Php, SQL
 
 #### **_Systems:_**
-* Kali Nethunter;
+* Kali Linux;
 
 #### **_Progrs RFS:_**
 * Client && Server;
