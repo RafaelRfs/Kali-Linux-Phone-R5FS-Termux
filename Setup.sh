@@ -12,6 +12,7 @@ dos2unix *.sh
 chmod 777 -R *
 ./aptInstallBin.sh
 ./aptInstallApps.sh
+./aptInstallGoogler.sh
 echo "[...]Installation Complete..."
 screenfet
 sleep 5
