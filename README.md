@@ -8,6 +8,7 @@
 * SSlstrip;
 * Ettercap;
 * Nmap;
+* Googler;
 
 #### **_Langs:_**
 -Python 2 && 3, C,C++,Ruby, Php, SQL
