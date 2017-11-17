@@ -12,5 +12,6 @@ mv network $bin_dir
 mv network-nmap $bin_dir
 mv verser $bin_dir
 mv screenfet $bin_dir
+mv nmp $bin_dir
 mv ngrok $bin_dir
 echo "[...]Complete..."
