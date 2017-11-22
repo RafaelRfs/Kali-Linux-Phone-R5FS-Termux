@@ -13,6 +13,7 @@ chmod 777 -R *
 ./aptInstallBin.sh
 ./aptInstallApps.sh
 ./aptInstallGoogler.sh
+./aptInstallWine32.sh
 echo "[...]Installation Complete..."
 screenfet
 sleep 5
