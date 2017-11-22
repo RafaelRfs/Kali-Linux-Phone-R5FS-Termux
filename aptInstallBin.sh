@@ -2,6 +2,8 @@ bin_dir=/usr/bin/
 echo "[+]Installing System binaries..."
 chmod 777 -R *
 cat iptab.sh > ${bin_dir}iptab
+echo cat /etc/system.d/*.conf > ${bin_dir}systemd_conf
+chmod a+x ${bin_dir}systemd_conf
 chmod 777 ${bin_dir}iptab
 cat setEtr.sh > ${bin_dir}setEtr
 chmod 777 ${bin_dir}setEtr
