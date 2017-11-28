@@ -19,4 +19,6 @@ mv ngrok $bin_dir
 mv hlp $bin_dir
 mv ipblock $bin_dir
 mv iplist $bin_dir
+mv ipaceptport $bin_dir
+mv ipdelete $bin_dir
 echo "[...]Complete..."
