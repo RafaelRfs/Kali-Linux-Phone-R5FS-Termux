@@ -1,1 +1,1 @@
-iptables -A INPUT -s $1 -j DROP
+iptables -A $1 -s $2 -j DROP
