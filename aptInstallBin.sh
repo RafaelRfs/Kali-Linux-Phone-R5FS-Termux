@@ -17,5 +17,6 @@ mv screenfet $bin_dir
 mv nmp $bin_dir
 mv ngrok $bin_dir
 mv hlp $bin_dir
-mv block $bin_dir
+mv ipblock $bin_dir
+mv iplist $bin_dir
 echo "[...]Complete..."
