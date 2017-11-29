@@ -1,5 +1,6 @@
 echo "[...]Installing Apps..."
 echo deb http://http.kali.org/kali kali-bleeding-edge main contrib non-free >> /etc/apt/sources.list.d/kali-bleeding-edge.list
+echo APT::Default-Release "kali-rolling" \;\ > /etc/apt/apt.conf.d/local
 dpkg --add-architecture i386
 apt update
 apt --fix-broken install
