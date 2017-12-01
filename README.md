@@ -20,7 +20,6 @@
 * Client && Server;
 * Admin Finder 2;
 * Bruteforce Form;
-* Facebook Bruteforce;
 * File Downloader;
 * Man in the Middle ~ MITM;
 * Scanner Networks/Ports;
