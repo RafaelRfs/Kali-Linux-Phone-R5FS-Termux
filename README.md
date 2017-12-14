@@ -23,7 +23,6 @@
 * File Downloader;
 * Man in the Middle ~ MITM;
 * Scanner Networks/Ports;
-* Phishing Facebook;
 * Verifiy Services (Verser);
 * Server Php;
 
