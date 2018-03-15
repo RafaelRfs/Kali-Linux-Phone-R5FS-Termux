@@ -1,0 +1,1 @@
+find ./* -path  $1 -prune -o -type f -exec grep -l $2 {} \;
