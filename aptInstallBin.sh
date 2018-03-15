@@ -21,4 +21,5 @@ mv ipblock $bin_dir
 mv iplist $bin_dir
 mv ipaceptport $bin_dir
 mv ipdelete $bin_dir
+mv pesquisa $bin_dir
 echo "[...]Complete..."
