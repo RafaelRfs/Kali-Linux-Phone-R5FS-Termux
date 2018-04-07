@@ -3,32 +3,29 @@ define('USERNAME', 'postgres');
 define('PASS','postgres');
 define('HOST','localhost');
 define('DBNAME','postgres');
-define('TYPE','pgsql');
+define('TYPEBD','pgsql');
 
-class Db {	
-private $db, $table = 'users' ;
+class Db{
+	
+private $conn, $table = 'users' ;
 
-public function __construct(){
+function __construct(){
 	$this->getConn();
 	}
 	
-private function getConn(){
-try{	
-if(is_null($this->db)){
-$this->db = new PDO(TYPE.':host='.HOST.';dbname='.DBNAME,USERNAME,PASS);
+function getConn(){
+	if(is_null($this->conn)){
+	$this->conn =  new PDO(TYPEBD.':host='.HOST.';dbname='.DBNAME, USER,PASS, array(PDO::ATTR_PERSISTENT => true));	
+	}
+	return $this->conn;
 }
-}catch(Exception $e){
-echo $e;
-return '';	
-}
-}//database connection
-
+	
 public function setTable($table){
 	$this->table = $table;
 	}
 	
 public function getTable(){ return $this->table;}
-	
+
 private function getStr($data){
 	$dt =  array();
 	$indices = array_keys($data);
@@ -52,46 +49,97 @@ private function getStr($data){
 	}//Fecha o Foreach
 	return $dt;
 	}
-		
-private function Prepare($pdo, $dta,$dx){
+
+function prepareSql($pdo, $dta,$dx){
 	$count = $dx['count'];
 	$count2 = count($dta);
 	if($count == $count2){
       for($i = 0; $i < $count ; $i++){
 		  $v = $i + 1 ;
-	      $pdo->bindValue($v, $dta[$dx['ind'][$i]], PDO::PARAM_STR);
+		  $pdo = $this->getVarTp($v,$dta[$dx['ind'][$i]], $pdo);
+		  
 		}
 	$pdo->execute();  
 	}
-	}//Private function 	
+	}	
 	
-public function Create($data){
+function getVarTp($indice,  $value, $pdo){
+	$tp_data = gettype($value);
+	switch($tp_data){
+		case "integer":
+		$pdo->bindValue($indice, $value, PDO::PARAM_INT );
+		break;
+	
+		case "string":
+		$pdo->bindValue($indice, $value, PDO::PARAM_STR );
+		break;
+			
+		case "NULL":
+		$pdo->bindValue($indice, $value, PDO::PARAM_NULL );
+		break;
+		
+		case "":
+		$pdo->bindValue($indice, $value, PDO::PARAM_NULL );
+		break;
+		
+		case "double":
+		$pdo->bindValue($indice, $value, PDO::PARAM_STR );
+		break;
+		
+		case "boolean":
+		$pdo->bindValue($indice, $value, PDO::PARAM_BOOL);
+		break;
+	
+		default:
+		$pdo->bindValue($indice, $value, PDO::PARAM_STR );		
+	}
+	return $pdo;
+}	
+		
+function Prepare($sql,$arg = '',$arg2 = '',$arg3='',$arg4='',$arg5 = ''){
+		$data = array();
+		$dados = $this->getConn()->prepare($sql);	
+		if(trim($arg) <> '' ){  $dados->bindValue(1,$arg,PDO::PARAM_STR);     }
+		if(trim($arg2) <> '' ){  $dados->bindValue(2,$arg2,PDO::PARAM_STR);     }
+		if(trim($arg3) <> '' ){  $dados->bindValue(3,$arg3,PDO::PARAM_STR);     }
+		if(trim($arg4) <> '' ){  $dados->bindValue(4,$arg4,PDO::PARAM_STR);     }
+		if(trim($arg5) <> '' ){  $dados->bindValue(5,$arg5,PDO::PARAM_STR);     }
+		$dados->execute();
+		$dados->setFetchMode(PDO::FETCH_ASSOC);
+		$data['count'] = $dados->rowCount();
+		$data['data'] = $dados->fetchAll();
+		return $data;
+	}	
+	
+public function Create($data,$table = ''){
+	$tab = trim($table) == '' ? $this->table : $table;
 	$dt = $this->getStr($data);
-	$sql = 'INSERT INTO '.$this->table.'('.$dt['str'].') Values('.$dt['qst'].')';
-	$pdo = $this->db->prepare($sql);
-	$this->Prepare($pdo,$data,$dt);
-    }// INSERT INTOOOOO
+	$sql = 'INSERT INTO '.$tab.'('.$dt['str'].') Values('.$dt['qst'].')';
+	$pdo = $this->getConn()->prepare($sql);
+	$this->prepareSql($pdo,$data,$dt);
+    }
 
-public function Read($where = ''){
-	$sql = 'SELECT * FROM '.$this->table;
+public function Read($where = '', $table = ''){
+	$tab = trim($table) == '' ? $this->table : $table;
+	$sql = 'SELECT * FROM '.$tab;
 	$sql = strip_tags(trim($where == ''))? $sql : $sql.' WHERE '.$where;
-	$pdo = $this->db->query($sql);
+	$pdo = $this->getConn()->query($sql);
 	$pdo->setFetchMode(PDO::FETCH_ASSOC);
 	return $pdo->fetchAll();
 	}
 	
-public function Update($id,$data,$camp = 'id'){
+public function Update($id,$camp = 'id',$data,$table){
+	$tab = trim($table) == '' ? $this->table : $table;
 	$dt =  $this->getStr($data);
-	var_dump($dt);
-	$sql = 'UPDATE '.$this->table.' SET '.$dt['cmb'].' WHERE '.$camp.'='.$id;
-	$pdo = $this->db->prepare($sql);
-	echo $sql;
-	$this->Prepare($pdo,$data,$dt);
+	$sql = 'UPDATE '.$tab.' SET '.$dt['cmb'].' WHERE '.$camp.'='.$id;
+	$pdo = $this->getConn()->prepare($sql);
+	$this->prepareSql($pdo,$data,$dt);
 	}
 	
-public function Delete($id,$camp='id'){
-	$sql = 'DELETE FROM '.$this->table.' WHERE '.$camp.'='.$id;
-	$pdo = $this->db->query($sql);
+public function Delete($id, $camp='id', $table = ''){
+	$tab = trim($table) == '' ? $this->table : $table;
+	$sql = 'DELETE FROM '.$tab.' WHERE '.$camp.'='.$id;
+	$pdo = $this->getConn()->query($sql);
 	}	
-		
-}//Classe do Bd Louco
+
+}//Fecha a classe de banco de dados
