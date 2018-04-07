@@ -56,8 +56,7 @@ function prepareSql($pdo, $dta,$dx){
 	if($count == $count2){
       for($i = 0; $i < $count ; $i++){
 		  $v = $i + 1 ;
-		  $pdo = $this->getVarTp($v,$dta[$dx['ind'][$i]], $pdo);
-		  
+		  $pdo = $this->getVarTp($v,$dta[$dx['ind'][$i]], $pdo);  
 		}
 	$pdo->execute();  
 	}
