@@ -1,5 +1,5 @@
 <?php
-define('USERNAME', 'postgres');
+define('USER', 'postgres');
 define('PASS','postgres');
 define('HOST','localhost');
 define('DBNAME','postgres');
